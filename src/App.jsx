@@ -43,6 +43,9 @@ const subjectList = [
     headline: '和熊猫老师一起去森林里找词语宝藏。',
     focus: '先认字，再读故事，最后大声说出来。',
     buddy: '熊猫老师最擅长帮助你把句子说完整。',
+    sceneTitle: '森林故事路已经铺好了',
+    sceneNote: '踩着树叶路牌往前走，每完成一个任务就会点亮一片叶子。',
+    scenePieces: ['🌳', '🍃', '📚'],
     rewards: ['森林朗读章', '识字小侦探'],
     tasks: [
       {
@@ -86,6 +89,9 @@ const subjectList = [
     headline: '狐狸队长在火箭站等你，一起点亮数学引擎。',
     focus: '先做口算热身，再挑战图形和思考题。',
     buddy: '狐狸队长会把难题拆成一步一步的小任务。',
+    sceneTitle: '火箭跑道已经闪灯啦',
+    sceneNote: '每做完一个小任务，跑道就会往前亮一格，离发射更近一点。',
+    scenePieces: ['🚀', '⭐', '🔢'],
     rewards: ['火箭加速章', '口算闪电章'],
     tasks: [
       {
@@ -129,6 +135,9 @@ const subjectList = [
     headline: '跟着小企鹅去海湾练口语，声音要像浪花一样亮。',
     focus: '先跟读，再拼读，最后试着说一句完整对话。',
     buddy: '小企鹅会陪你练开口，不着急，慢慢来。',
+    sceneTitle: '海湾练声台已经准备好',
+    sceneNote: '海浪拍三下，就完成一轮练习，声音会越来越亮。',
+    scenePieces: ['🌊', '🐚', '🎵'],
     rewards: ['海湾发音章', '勇敢开口章'],
     tasks: [
       {
@@ -169,6 +178,15 @@ const starterMessages = [
     role: 'assistant',
     text: '你好呀，今天也来一起打卡吧。我已经帮你排好了舒服的学习顺序。',
   },
+]
+
+const rewardBurstBits = [
+  { emoji: '⭐', top: '10%', left: '12%', delay: 0 },
+  { emoji: '✨', top: '18%', right: '14%', delay: 0.08 },
+  { emoji: '🌟', top: '34%', left: '6%', delay: 0.16 },
+  { emoji: '💫', top: '32%', right: '8%', delay: 0.24 },
+  { emoji: '⭐', bottom: '22%', left: '10%', delay: 0.32 },
+  { emoji: '✨', bottom: '16%', right: '12%', delay: 0.4 },
 ]
 
 function buildBuddyReply(message, subject, firstTask) {
@@ -239,6 +257,52 @@ function RewardBadge({ label, emoji }) {
     <div className="reward-badge">
       <span>{emoji}</span>
       <strong>{label}</strong>
+    </div>
+  )
+}
+
+function SceneStage({ subject, title, note, ribbon }) {
+  return (
+    <div className={`scene-stage theme-${subject.id}`}>
+      <div className="scene-stage__content">
+        <div className="scene-stage__ribbon">
+          <Sparkles size={16} />
+          {ribbon}
+        </div>
+        <div className="scene-stage__title">{title}</div>
+        <div className="scene-stage__note">{note}</div>
+
+        <div className="scene-stage__steps">
+          {subject.tasks.map((task, index) => (
+            <div key={task.id} className="scene-stage__step">
+              <span>{index + 1}</span>
+              <small>{task.title}</small>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="scene-stage__art">
+        <div className="scene-stage__halo" />
+        <div className="scene-stage__mascot">{subject.mascot}</div>
+        <div className="scene-stage__pieces">
+          {subject.scenePieces.map((piece, index) => (
+            <motion.span
+              key={`${piece}-${index}`}
+              className={`scene-stage__piece piece-${index + 1}`}
+              animate={{ y: [0, -8, 0], rotate: [0, index % 2 === 0 ? 4 : -4, 0] }}
+              transition={{
+                duration: 3.2 + index * 0.4,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: 'easeInOut',
+                delay: index * 0.2,
+              }}
+            >
+              {piece}
+            </motion.span>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
@@ -517,7 +581,7 @@ export default function StudyCheckinTabletPro() {
               )}
 
               {page === 'subject' && (
-                <section className="page page-subject">
+                <section className={`page page-subject theme-${activeSubject.id}`}>
                   <div className="section-head">
                     <button type="button" className="back-button" onClick={() => setPage('home')}>
                       <ArrowLeft size={18} />
@@ -530,6 +594,13 @@ export default function StudyCheckinTabletPro() {
                       </h2>
                     </div>
                   </div>
+
+                  <SceneStage
+                    subject={activeSubject}
+                    ribbon={`${activeSubject.short} 场景地图`}
+                    title={activeSubject.sceneTitle}
+                    note={activeSubject.sceneNote}
+                  />
 
                   <div className="subject-layout">
                     <div className="panel mission-panel">
@@ -602,7 +673,7 @@ export default function StudyCheckinTabletPro() {
               )}
 
               {page === 'checkin' && (
-                <section className="page page-checkin">
+                <section className={`page page-checkin theme-${activeSubject.id}`}>
                   <div className="section-head">
                     <button type="button" className="back-button" onClick={() => setPage('subject')}>
                       <ArrowLeft size={18} />
@@ -613,6 +684,13 @@ export default function StudyCheckinTabletPro() {
                       <h2>{activeSubject.mascot} 亮灯打卡台</h2>
                     </div>
                   </div>
+
+                  <SceneStage
+                    subject={activeSubject}
+                    ribbon="终点灯牌"
+                    title={`再往前一步，就能点亮 ${activeSubject.name} 的终点徽章`}
+                    note={`现在已经完成 ${completedCount} 项，继续把路灯一盏盏点亮。`}
+                  />
 
                   <div className="checkin-layout">
                     <div className="panel checkin-board">
@@ -663,7 +741,7 @@ export default function StudyCheckinTabletPro() {
               )}
 
               {page === 'buddy' && (
-                <section className="page page-buddy">
+                <section className={`page page-buddy theme-${activeSubject.id}`}>
                   <div className="section-head">
                     <button type="button" className="back-button" onClick={() => setPage('home')}>
                       <ArrowLeft size={18} />
@@ -676,6 +754,13 @@ export default function StudyCheckinTabletPro() {
                       </h2>
                     </div>
                   </div>
+
+                  <SceneStage
+                    subject={activeSubject}
+                    ribbon="陪练舞台"
+                    title={`${activeSubject.mascot} ${activeSubject.name} 的陪练舞台已经开灯`}
+                    note={activeSubject.buddy}
+                  />
 
                   <div className="buddy-layout">
                     <div className="panel buddy-stage">
@@ -812,10 +897,35 @@ export default function StudyCheckinTabletPro() {
               transition={{ duration: 0.22 }}
             >
               <div className="reward-popup__stars">✨ ⭐ ✨</div>
+              <div className="reward-popup__burst">
+                {rewardBurstBits.map((bit) => (
+                  <motion.span
+                    key={`${bit.emoji}-${bit.top ?? bit.bottom}-${bit.left ?? bit.right}`}
+                    className="reward-popup__burst-item"
+                    style={bit}
+                    initial={{ opacity: 0, scale: 0.6, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: [10, -8, 0] }}
+                    transition={{ duration: 0.65, delay: bit.delay }}
+                  >
+                    {bit.emoji}
+                  </motion.span>
+                ))}
+              </div>
               <div className="reward-popup__emoji">{rewardPopup.emoji}</div>
               <div className="reward-popup__title">恭喜你完成打卡</div>
               <div className="reward-popup__name">{rewardPopup.subjectName}</div>
-              <div className="reward-popup__badge">获得新徽章：{rewardPopup.title}</div>
+              <motion.div
+                className="reward-popup__badge-card"
+                initial={{ rotateY: -90, opacity: 0 }}
+                animate={{ rotateY: 0, opacity: 1 }}
+                transition={{ duration: 0.45, delay: 0.18 }}
+              >
+                <div className="reward-popup__badge-emoji">{rewardPopup.emoji}</div>
+                <div className="reward-popup__badge-text">
+                  <span>获得新徽章</span>
+                  <strong>{rewardPopup.title}</strong>
+                </div>
+              </motion.div>
               <div className="reward-popup__bonus">本次额外获得 {rewardPopup.stars} 颗星星</div>
 
               <div className="reward-popup__actions">
