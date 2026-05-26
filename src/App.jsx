@@ -261,6 +261,21 @@ function RewardBadge({ label, emoji }) {
   )
 }
 
+function RewardTarget({ target }) {
+  return (
+    <div className="reward-target">
+      <div className="reward-target__emoji">{target.emoji}</div>
+      <div className="reward-target__body">
+        <strong>{target.label}</strong>
+        <span>{target.note}</span>
+      </div>
+      <div className={`reward-target__tag ${target.unlocked ? 'is-unlocked' : ''}`}>
+        {target.unlocked ? '下一枚' : '待解锁'}
+      </div>
+    </div>
+  )
+}
+
 function SceneStage({ subject, title, note, ribbon }) {
   return (
     <div className={`scene-stage theme-${subject.id}`}>
@@ -312,6 +327,7 @@ export default function StudyCheckinTabletPro() {
   const [activeSubjectId, setActiveSubjectId] = useState('chinese')
   const [messages, setMessages] = useState(starterMessages)
   const [draft, setDraft] = useState('')
+  const [sceneIntro, setSceneIntro] = useState(null)
   const [taskSpark, setTaskSpark] = useState(null)
   const [rewardPopup, setRewardPopup] = useState(null)
   const [checkedMap, setCheckedMap] = useState({
@@ -320,8 +336,8 @@ export default function StudyCheckinTabletPro() {
     english: ['follow'],
   })
   const [earnedBadges, setEarnedBadges] = useState([
-    { id: 'starter', label: '连续打卡 6 天', emoji: '🌟' },
-    { id: 'voice', label: '勇敢开口', emoji: '🎤' },
+    { id: 'starter', label: '连续打卡 6 天', emoji: '🌟', category: 'milestone' },
+    { id: 'voice', label: '勇敢开口', emoji: '🎤', category: 'milestone' },
   ])
 
   const activeSubject =
@@ -346,15 +362,62 @@ export default function StudyCheckinTabletPro() {
     return base + bonus
   }, [checkedMap])
 
+  const earnedRewardIds = useMemo(
+    () => new Set(earnedBadges.map((badge) => badge.id)),
+    [earnedBadges],
+  )
+
+  const featuredBadges = useMemo(
+    () => earnedBadges.filter((badge) => badge.category === 'subject').slice(-3).reverse(),
+    [earnedBadges],
+  )
+
+  const collectionBadges = useMemo(
+    () => earnedBadges.filter((badge) => badge.category !== 'subject'),
+    [earnedBadges],
+  )
+
+  const nextRewardTargets = useMemo(
+    () =>
+      subjectList.map((subject) => {
+        const unlockedPrimary = earnedRewardIds.has(`${subject.id}-reward`)
+        return {
+          id: subject.id,
+          emoji: subject.sticker,
+          label: unlockedPrimary ? subject.rewards[1] : subject.rewards[0],
+          unlocked: unlockedPrimary,
+          note: unlockedPrimary
+            ? `继续打卡 ${subject.name}，下一枚会更厉害。`
+            : `完成 ${subject.name} 全部任务就能点亮。`,
+        }
+      }),
+    [earnedRewardIds],
+  )
+
   const todayLabel = new Intl.DateTimeFormat('zh-CN', {
     month: 'numeric',
     day: 'numeric',
     weekday: 'short',
   }).format(new Date())
 
+  function startSceneTransition(subjectId, nextPage, title) {
+    const subject = subjectList.find((item) => item.id === subjectId)
+    if (!subject) return
+
+    setSceneIntro({
+      subject,
+      title,
+    })
+
+    window.setTimeout(() => {
+      setActiveSubjectId(subjectId)
+      setPage(nextPage)
+      setSceneIntro(null)
+    }, 620)
+  }
+
   function openSubject(subjectId) {
-    setActiveSubjectId(subjectId)
-    setPage('subject')
+    startSceneTransition(subjectId, 'subject', '出发去学科场景')
   }
 
   function toggleTask(taskId) {
@@ -413,7 +476,15 @@ export default function StudyCheckinTabletPro() {
 
     setEarnedBadges((current) => {
       if (current.some((item) => item.id === rewardId)) return current
-      return [...current, { id: rewardId, label: rewardLabel, emoji: activeSubject.sticker }]
+      return [
+        ...current,
+        {
+          id: rewardId,
+          label: rewardLabel,
+          emoji: activeSubject.sticker,
+          category: 'subject',
+        },
+      ]
     })
 
     setMessages((current) => [
@@ -443,6 +514,42 @@ export default function StudyCheckinTabletPro() {
         '--subject-glow': activeSubject.glow,
       }}
     >
+      <AnimatePresence>
+        {sceneIntro && (
+          <motion.div
+            className={`scene-intro theme-${sceneIntro.subject.id}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="scene-intro__card"
+              initial={{ opacity: 0, scale: 0.92, y: 14 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -10 }}
+              transition={{ duration: 0.24 }}
+            >
+              <div className="scene-intro__eyebrow">{sceneIntro.title}</div>
+              <div className="scene-intro__title">{sceneIntro.subject.name}</div>
+              <div className="scene-intro__mascot">{sceneIntro.subject.mascot}</div>
+              <div className="scene-intro__pieces">
+                {sceneIntro.subject.scenePieces.map((piece, index) => (
+                  <motion.span
+                    key={`${sceneIntro.subject.id}-${piece}-${index}`}
+                    className="scene-intro__piece"
+                    initial={{ opacity: 0, y: 10, scale: 0.7 }}
+                    animate={{ opacity: 1, y: [10, -8, 0], scale: 1 }}
+                    transition={{ duration: 0.48, delay: index * 0.08 }}
+                  >
+                    {piece}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {taskSpark && (
           <motion.div
@@ -515,7 +622,9 @@ export default function StudyCheckinTabletPro() {
                         <button
                           type="button"
                           className="primary-cta"
-                          onClick={() => openSubject(activeSubjectId)}
+                          onClick={() =>
+                            startSceneTransition(activeSubjectId, 'subject', '出发去今日场景')
+                          }
                         >
                           <CirclePlay size={18} />
                           开始今天打卡
@@ -662,7 +771,13 @@ export default function StudyCheckinTabletPro() {
                           <BrainCircuit size={18} />
                           去问小伙伴
                         </button>
-                        <button type="button" className="primary-cta" onClick={() => setPage('checkin')}>
+                        <button
+                          type="button"
+                          className="primary-cta"
+                          onClick={() =>
+                            startSceneTransition(activeSubjectId, 'checkin', '前往亮灯打卡台')
+                          }
+                        >
                           <CirclePlay size={18} />
                           去打卡
                         </button>
@@ -836,22 +951,52 @@ export default function StudyCheckinTabletPro() {
                     </div>
                   </div>
 
-                  <div className="reward-layout">
+                  <div className="reward-layout reward-layout--wall">
                     <div className="panel treasure-panel">
                       <div className="treasure-score">{totalStars}</div>
                       <div className="treasure-label">闪亮星星</div>
                       <div className="treasure-note">每完成一个小任务，就会多点亮 2 颗星。</div>
                     </div>
 
-                    <div className="panel badges-panel">
-                      <div className="panel__title">
-                        <Trophy size={18} />
-                        已获得徽章
+                    <div className="panel badges-panel badges-panel--wall">
+                      <div className="reward-shelf">
+                        <div className="panel__title">
+                          <Gift size={18} />
+                          今日点亮
+                        </div>
+                        <div className="badges-grid badges-grid--featured">
+                          {featuredBadges.length > 0 ? (
+                            featuredBadges.map((badge) => (
+                              <RewardBadge key={badge.id} label={badge.label} emoji={badge.emoji} />
+                            ))
+                          ) : (
+                            <div className="reward-empty">今天还没有新徽章，先去完成一个学科吧。</div>
+                          )}
+                        </div>
                       </div>
-                      <div className="badges-grid">
-                        {earnedBadges.map((badge) => (
-                          <RewardBadge key={badge.id} label={badge.label} emoji={badge.emoji} />
-                        ))}
+
+                      <div className="reward-shelf">
+                        <div className="panel__title">
+                          <Trophy size={18} />
+                          成长收藏
+                        </div>
+                        <div className="badges-grid">
+                          {collectionBadges.map((badge) => (
+                            <RewardBadge key={badge.id} label={badge.label} emoji={badge.emoji} />
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="reward-shelf">
+                        <div className="panel__title">
+                          <Map size={18} />
+                          下一站奖励
+                        </div>
+                        <div className="reward-targets">
+                          {nextRewardTargets.map((target) => (
+                            <RewardTarget key={target.id} target={target} />
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -25,6 +25,74 @@
     0 8px 18px rgba(255, 203, 105, 0.18);
 }
 
+.scene-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  backdrop-filter: blur(8px);
+}
+
+.scene-intro.theme-chinese {
+  background: rgba(255, 241, 233, 0.74);
+}
+
+.scene-intro.theme-math {
+  background: rgba(236, 245, 255, 0.74);
+}
+
+.scene-intro.theme-english {
+  background: rgba(232, 255, 252, 0.74);
+}
+
+.scene-intro__card {
+  min-width: min(460px, 100%);
+  padding: 28px 28px 22px;
+  border-radius: 34px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.96);
+  box-shadow: 0 28px 70px rgba(96, 160, 204, 0.22);
+}
+
+.scene-intro__eyebrow,
+.scene-intro__title {
+  font-family:
+    'Avenir Next',
+    'SF Pro Rounded',
+    'PingFang SC',
+    'Helvetica Neue',
+    sans-serif;
+}
+
+.scene-intro__eyebrow {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.scene-intro__title {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.scene-intro__mascot {
+  font-size: 90px;
+  line-height: 1;
+  margin: 16px 0 10px;
+}
+
+.scene-intro__pieces {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  font-size: 32px;
+}
+
 .float-sticker {
   position: fixed;
   z-index: 0;
@@ -658,6 +726,14 @@
   line-height: 1;
 }
 
+.reward-empty {
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--text-secondary);
+  box-shadow: inset 0 0 0 1px rgba(219, 235, 245, 0.88);
+}
+
 .section-head {
   margin-bottom: 2px;
 }
@@ -991,6 +1067,83 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.badges-grid--featured {
+  grid-template-columns: 1fr;
+}
+
+.badges-panel--wall {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.reward-shelf {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(223, 236, 244, 0.9);
+}
+
+.reward-targets {
+  display: grid;
+  gap: 12px;
+}
+
+.reward-target {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: inset 0 0 0 1px rgba(222, 236, 244, 0.88);
+}
+
+.reward-target__emoji {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 246, 219, 0.92);
+  font-size: 24px;
+}
+
+.reward-target__body {
+  display: grid;
+  gap: 4px;
+}
+
+.reward-target__body strong {
+  font-size: 1rem;
+}
+
+.reward-target__body span {
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.reward-target__tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 66px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(230, 239, 244, 0.88);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.reward-target__tag.is-unlocked {
+  background: rgba(255, 239, 204, 0.92);
+  color: #d88711;
+}
+
 .bottom-dock {
   display: flex;
   align-items: center;
@@ -1168,6 +1321,15 @@
 
   .subject-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reward-target {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+
+  .reward-target__tag {
+    grid-column: 2;
+    justify-self: start;
   }
 }
 
