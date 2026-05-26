@@ -48,6 +48,8 @@ const subjectList = [
     mode: '同步巩固',
     progress: 76,
     stars: 8,
+    trackLabel: '课内同步',
+    focusTags: ['生字词', '课文朗读', '句子表达'],
     mission: '生字词回顾 + 课文朗读 + 看图表达',
     headline: '和熊猫老师一起把二年级语文课本里的重点字词再稳一遍。',
     focus: '先回顾本周生字词，再朗读课文，最后用自己的话说一句完整句子。',
@@ -95,6 +97,8 @@ const subjectList = [
     mode: '单元复习',
     progress: 61,
     stars: 7,
+    trackLabel: '复习专题',
+    focusTags: ['100以内计算', '表内乘法', '有余数除法', '解决问题'],
     mission: '计算回顾 + 错题回放 + 综合闯关',
     headline: '课内内容已经学完，今天跟狐狸队长做一轮二年级数学复习闯关。',
     focus: '先回顾计算，再看错题，最后做一页综合小练习。',
@@ -142,6 +146,8 @@ const subjectList = [
     mode: '兴趣拓展',
     progress: 84,
     stars: 9,
+    trackLabel: '轻量拓展',
+    focusTags: ['高频词', '自然拼读', '开口表达'],
     mission: '高频词跟读 + 拼读练习 + 日常句型',
     headline: '跟着小企鹅在海湾做一组轻量英语口语练习，当作二年级阶段的兴趣拓展。',
     focus: '先跟读高频词，再练拼读，最后开口说一句简单日常句型。',
@@ -248,6 +254,11 @@ function SubjectCard({ subject, onOpen }) {
         <div className="subject-card__mode">{subject.mode}</div>
         <h3>{subject.name}</h3>
         <p>{subject.mission}</p>
+        <div className="subject-card__tags">
+          {subject.focusTags.slice(0, 3).map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
       </div>
 
       <div className="subject-card__footer">
@@ -756,6 +767,15 @@ export default function StudyCheckinTabletPro() {
                         <div className="mission-card__footer">
                           <span>当前进度 {activeSubject.progress}%</span>
                           <strong>{completedCount}/{activeSubject.tasks.length} 项已点亮</strong>
+                        </div>
+                      </div>
+
+                      <div className="topic-panel">
+                        <div className="topic-panel__label">{activeSubject.trackLabel}</div>
+                        <div className="topic-panel__tags">
+                          {activeSubject.focusTags.map((tag) => (
+                            <span key={tag}>{tag}</span>
+                          ))}
                         </div>
                       </div>
 

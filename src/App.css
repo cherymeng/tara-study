@@ -667,6 +667,27 @@
   color: var(--text-secondary);
 }
 
+.subject-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.subject-card__tags span,
+.topic-panel__tags span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px rgba(229, 238, 243, 0.85);
+}
+
 .subject-card__stars,
 .subject-card__enter {
   display: inline-flex;
@@ -842,6 +863,27 @@
   flex-wrap: wrap;
   color: var(--text-secondary);
   font-size: 0.92rem;
+}
+
+.topic-panel {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: inset 0 0 0 1px rgba(223, 236, 244, 0.88);
+}
+
+.topic-panel__label {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--subject-deep);
+  margin-bottom: 10px;
+}
+
+.topic-panel__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .mascot-speech {
