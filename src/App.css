@@ -495,6 +495,32 @@
   flex-wrap: wrap;
 }
 
+.study-profile {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.study-profile__item {
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: inset 0 0 0 1px rgba(224, 237, 245, 0.88);
+}
+
+.study-profile__item strong {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+.study-profile__item span {
+  display: block;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-size: 0.88rem;
+}
+
 .primary-cta,
 .soft-cta,
 .back-button,
@@ -615,6 +641,20 @@
 
 .subject-card__body {
   margin: 20px 0;
+}
+
+.subject-card__mode {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--card-deep);
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  box-shadow: inset 0 0 0 1px rgba(230, 238, 243, 0.8);
 }
 
 .subject-card__body h3 {
@@ -1321,6 +1361,10 @@
 
   .subject-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .study-profile {
+    grid-template-columns: 1fr;
   }
 
   .reward-target {

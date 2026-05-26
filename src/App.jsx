@@ -25,6 +25,14 @@ import {
 } from 'lucide-react'
 import './App.css'
 
+const studentProfile = {
+  grade: '二年级',
+  edition: '人教版',
+  mathStage: '课内已学完，进入复习',
+  chineseStage: '同步巩固',
+  englishStage: '兴趣拓展',
+}
+
 const subjectList = [
   {
     id: 'chinese',
@@ -37,35 +45,36 @@ const subjectList = [
     soft: '#fff1ea',
     glow: 'rgba(255, 141, 105, 0.34)',
     icon: BookOpenText,
+    mode: '同步巩固',
     progress: 76,
     stars: 8,
-    mission: '认字卡 + 读故事 + 说一句',
-    headline: '和熊猫老师一起去森林里找词语宝藏。',
-    focus: '先认字，再读故事，最后大声说出来。',
-    buddy: '熊猫老师最擅长帮助你把句子说完整。',
-    sceneTitle: '森林故事路已经铺好了',
-    sceneNote: '踩着树叶路牌往前走，每完成一个任务就会点亮一片叶子。',
+    mission: '生字词回顾 + 课文朗读 + 看图表达',
+    headline: '和熊猫老师一起把二年级语文课本里的重点字词再稳一遍。',
+    focus: '先回顾本周生字词，再朗读课文，最后用自己的话说一句完整句子。',
+    buddy: '熊猫老师会重点提醒你字音、词语搭配和句子表达。',
+    sceneTitle: '语文同步巩固路线已经铺好',
+    sceneNote: '按照“字词-课文-表达”三步走，更适合二年级人教版语文日常巩固。',
     scenePieces: ['🌳', '🍃', '📚'],
     rewards: ['森林朗读章', '识字小侦探'],
     tasks: [
       {
         id: 'hanzi',
-        title: '字卡翻翻乐',
-        description: '翻一翻 8 张字卡，认识今天的新朋友。',
+        title: '本课生字回顾',
+        description: '回顾课堂学过的 8 个生字词，重点看读音和组词。',
         duration: '8 分钟',
         reward: '+2 星',
       },
       {
         id: 'story',
-        title: '故事小阅读',
-        description: '读一篇短故事，找到人物和发生的事情。',
+        title: '课文朗读复习',
+        description: '朗读本周课文，圈出容易停顿或读错的句子。',
         duration: '10 分钟',
         reward: '+3 星',
       },
       {
         id: 'speak',
-        title: '大声说一句',
-        description: '挑一句你最喜欢的话，读给熊猫老师听。',
+        title: '看图说一句',
+        description: '根据图片或课文内容，说一句完整、通顺的话。',
         duration: '5 分钟',
         reward: '+2 星',
       },
@@ -83,40 +92,41 @@ const subjectList = [
     soft: '#eef5ff',
     glow: 'rgba(90, 158, 255, 0.32)',
     icon: Calculator,
+    mode: '单元复习',
     progress: 61,
     stars: 7,
-    mission: '口算冲刺 + 图形观察 + 小思考',
-    headline: '狐狸队长在火箭站等你，一起点亮数学引擎。',
-    focus: '先做口算热身，再挑战图形和思考题。',
-    buddy: '狐狸队长会把难题拆成一步一步的小任务。',
-    sceneTitle: '火箭跑道已经闪灯啦',
-    sceneNote: '每做完一个小任务，跑道就会往前亮一格，离发射更近一点。',
+    mission: '计算回顾 + 错题回放 + 综合闯关',
+    headline: '课内内容已经学完，今天跟狐狸队长做一轮二年级数学复习闯关。',
+    focus: '先回顾计算，再看错题，最后做一页综合小练习。',
+    buddy: '狐狸队长会提醒你把口算、竖式和解决问题分开复习，不混在一起做。',
+    sceneTitle: '数学复习跑道已经点亮',
+    sceneNote: '按照“计算-错题-综合”三步走，更适合二年级人教版数学课内复习。',
     scenePieces: ['🚀', '⭐', '🔢'],
-    rewards: ['火箭加速章', '口算闪电章'],
+    rewards: ['复习冲刺章', '错题克星章'],
     tasks: [
       {
         id: 'mental',
-        title: '口算冲冲冲',
-        description: '完成 20 题口算，让数字跑起来。',
+        title: '计算热身回顾',
+        description: '完成 20 题口算回顾，重点复习 100 以内加减和常见易错题。',
         duration: '8 分钟',
         reward: '+3 星',
       },
       {
         id: 'shape',
-        title: '图形找朋友',
-        description: '看一看旋转和翻转，找出正确图形。',
+        title: '错题回放站',
+        description: '把最近课堂错题再做一遍，重点看竖式、审题和单位。',
         duration: '9 分钟',
         reward: '+2 星',
       },
       {
         id: 'thinking',
-        title: '聪明脑袋题',
-        description: '试着用 3 步想一想，把题目拆开做。',
+        title: '综合小闯关',
+        description: '做一页复习题，涵盖计算、应用题和常见知识点回顾。',
         duration: '12 分钟',
         reward: '+3 星',
       },
     ],
-    prompts: ['口算总算错怎么办？', '这道题太难了', '怎么做得更快？'],
+    prompts: ['数学今天先复习哪一块？', '错题总是重复怎么办？', '应用题怎么审题更稳？'],
   },
   {
     id: 'english',
@@ -129,35 +139,36 @@ const subjectList = [
     soft: '#ebfffd',
     glow: 'rgba(82, 209, 202, 0.32)',
     icon: Languages,
+    mode: '兴趣拓展',
     progress: 84,
     stars: 9,
-    mission: '单词跟读 + 拼读练习 + 小对话',
-    headline: '跟着小企鹅去海湾练口语，声音要像浪花一样亮。',
-    focus: '先跟读，再拼读，最后试着说一句完整对话。',
-    buddy: '小企鹅会陪你练开口，不着急，慢慢来。',
-    sceneTitle: '海湾练声台已经准备好',
-    sceneNote: '海浪拍三下，就完成一轮练习，声音会越来越亮。',
+    mission: '高频词跟读 + 拼读练习 + 日常句型',
+    headline: '跟着小企鹅在海湾做一组轻量英语口语练习，当作二年级阶段的兴趣拓展。',
+    focus: '先跟读高频词，再练拼读，最后开口说一句简单日常句型。',
+    buddy: '小企鹅会陪你慢慢开口，不要求快，先把发音说清楚。',
+    sceneTitle: '英语拓展练声台已经准备好',
+    sceneNote: '用短时、高频、轻负担的方式练英语，更适合二年级当前节奏。',
     scenePieces: ['🌊', '🐚', '🎵'],
     rewards: ['海湾发音章', '勇敢开口章'],
     tasks: [
       {
         id: 'follow',
-        title: '单词跟跟读',
-        description: '跟读 10 个单词，让发音更清楚。',
+        title: '高频词跟读',
+        description: '跟读 8 到 10 个高频词，让嘴巴先热起来。',
         duration: '7 分钟',
         reward: '+2 星',
       },
       {
         id: 'phonics',
-        title: '拼读小海浪',
-        description: '练习自然拼读，把声音连起来。',
+        title: '拼读小练习',
+        description: '练一组简单拼读，把声音连起来、读清楚。',
         duration: '9 分钟',
         reward: '+3 星',
       },
       {
         id: 'talk',
-        title: '打招呼对话',
-        description: '试着说一段简单问候，开口更自信。',
+        title: '日常句型开口',
+        description: '练一句打招呼或介绍自己的短句，先敢说出来。',
         duration: '6 分钟',
         reward: '+2 星',
       },
@@ -234,6 +245,7 @@ function SubjectCard({ subject, onOpen }) {
       </div>
 
       <div className="subject-card__body">
+        <div className="subject-card__mode">{subject.mode}</div>
         <h3>{subject.name}</h3>
         <p>{subject.mission}</p>
       </div>
@@ -324,7 +336,7 @@ function SceneStage({ subject, title, note, ribbon }) {
 
 export default function StudyCheckinTabletPro() {
   const [page, setPage] = useState('home')
-  const [activeSubjectId, setActiveSubjectId] = useState('chinese')
+  const [activeSubjectId, setActiveSubjectId] = useState('math')
   const [messages, setMessages] = useState(starterMessages)
   const [draft, setDraft] = useState('')
   const [sceneIntro, setSceneIntro] = useState(null)
@@ -578,15 +590,19 @@ export default function StudyCheckinTabletPro() {
               {todayLabel}
             </div>
             <div>
-              <h1>今天也来和小伙伴一起打卡吧</h1>
-              <p>点一点大卡片就能开始，做完会拿到星星和徽章。</p>
+              <h1>{studentProfile.grade} · {studentProfile.edition} 打卡计划已经准备好</h1>
+              <p>当前内容会按真实学习情况适配，数学默认进入课内复习，语文做同步巩固，英语做轻量拓展。</p>
             </div>
           </div>
 
           <div className="app-header__right">
             <div className="header-chip">
+              <CalendarDays size={16} />
+              {studentProfile.grade} · {studentProfile.edition}
+            </div>
+            <div className="header-chip">
               <Footprints size={16} />
-              连续打卡 6 天
+              {studentProfile.mathStage}
             </div>
             <div className="header-chip header-chip--stars">
               <Star size={16} />
@@ -612,12 +628,26 @@ export default function StudyCheckinTabletPro() {
                     <div className="story-card">
                       <div className="story-card__bubble">
                         <Sparkles size={16} />
-                        今日任务地图已经亮起来啦
+                        当前已按学习进度适配
                       </div>
                       <div className="story-card__title">
                         {activeSubject.mascot} {activeSubject.headline}
                       </div>
                       <div className="story-card__text">{activeSubject.focus}</div>
+                      <div className="study-profile">
+                        <div className="study-profile__item">
+                          <strong>语文</strong>
+                          <span>{studentProfile.chineseStage}</span>
+                        </div>
+                        <div className="study-profile__item">
+                          <strong>数学</strong>
+                          <span>{studentProfile.mathStage}</span>
+                        </div>
+                        <div className="study-profile__item">
+                          <strong>英语</strong>
+                          <span>{studentProfile.englishStage}</span>
+                        </div>
+                      </div>
                       <div className="story-card__actions">
                         <button
                           type="button"
