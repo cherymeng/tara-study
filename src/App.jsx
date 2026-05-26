@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   ArrowLeft,
@@ -248,6 +248,8 @@ export default function StudyCheckinTabletPro() {
   const [activeSubjectId, setActiveSubjectId] = useState('chinese')
   const [messages, setMessages] = useState(starterMessages)
   const [draft, setDraft] = useState('')
+  const [taskSpark, setTaskSpark] = useState(null)
+  const [rewardPopup, setRewardPopup] = useState(null)
   const [checkedMap, setCheckedMap] = useState({
     chinese: ['hanzi'],
     math: [],
@@ -263,6 +265,16 @@ export default function StudyCheckinTabletPro() {
   const checkedTasks = checkedMap[activeSubjectId] ?? []
   const completedCount = checkedTasks.length
   const isSubjectDone = completedCount === activeSubject.tasks.length
+
+  useEffect(() => {
+    if (!taskSpark) return undefined
+
+    const timer = window.setTimeout(() => {
+      setTaskSpark(null)
+    }, 1500)
+
+    return () => window.clearTimeout(timer)
+  }, [taskSpark])
 
   const totalStars = useMemo(() => {
     const base = subjectList.reduce((sum, subject) => sum + subject.stars, 0)
@@ -282,9 +294,19 @@ export default function StudyCheckinTabletPro() {
   }
 
   function toggleTask(taskId) {
+    const task = activeSubject.tasks.find((item) => item.id === taskId)
+
     setCheckedMap((current) => {
       const doneList = current[activeSubjectId] ?? []
       const exists = doneList.includes(taskId)
+
+      if (!exists && task) {
+        setTaskSpark({
+          id: Date.now(),
+          text: `${task.reward} 已点亮`,
+        })
+      }
+
       return {
         ...current,
         [activeSubjectId]: exists
@@ -339,7 +361,12 @@ export default function StudyCheckinTabletPro() {
       },
     ])
 
-    setPage('rewards')
+    setRewardPopup({
+      emoji: activeSubject.sticker,
+      title: rewardLabel,
+      subjectName: activeSubject.name,
+      stars: activeSubject.tasks.length * 2,
+    })
   }
 
   return (
@@ -352,6 +379,22 @@ export default function StudyCheckinTabletPro() {
         '--subject-glow': activeSubject.glow,
       }}
     >
+      <AnimatePresence>
+        {taskSpark && (
+          <motion.div
+            key={taskSpark.id}
+            className="task-spark"
+            initial={{ opacity: 0, y: 18, scale: 0.92 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -24, scale: 0.94 }}
+            transition={{ duration: 0.22 }}
+          >
+            <Sparkles size={16} />
+            {taskSpark.text}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="float-sticker sticker-one">⭐</div>
       <div className="float-sticker sticker-two">🫧</div>
       <div className="float-sticker sticker-three">☁️</div>
@@ -752,6 +795,57 @@ export default function StudyCheckinTabletPro() {
           })}
         </nav>
       </div>
+
+      <AnimatePresence>
+        {rewardPopup && (
+          <motion.div
+            className="reward-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="reward-popup"
+              initial={{ opacity: 0, y: 28, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 22, scale: 0.96 }}
+              transition={{ duration: 0.22 }}
+            >
+              <div className="reward-popup__stars">✨ ⭐ ✨</div>
+              <div className="reward-popup__emoji">{rewardPopup.emoji}</div>
+              <div className="reward-popup__title">恭喜你完成打卡</div>
+              <div className="reward-popup__name">{rewardPopup.subjectName}</div>
+              <div className="reward-popup__badge">获得新徽章：{rewardPopup.title}</div>
+              <div className="reward-popup__bonus">本次额外获得 {rewardPopup.stars} 颗星星</div>
+
+              <div className="reward-popup__actions">
+                <button
+                  type="button"
+                  className="primary-cta"
+                  onClick={() => {
+                    setRewardPopup(null)
+                    setPage('rewards')
+                  }}
+                >
+                  <Gift size={18} />
+                  去奖励屋看看
+                </button>
+                <button
+                  type="button"
+                  className="soft-cta"
+                  onClick={() => {
+                    setRewardPopup(null)
+                    setPage('home')
+                  }}
+                >
+                  <House size={18} />
+                  回到首页
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
