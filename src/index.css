@@ -7,19 +7,20 @@
     sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #17324a;
+  color: #1d3551;
   background:
-    radial-gradient(circle at top left, rgba(153, 219, 255, 0.42), transparent 28%),
-    radial-gradient(circle at 85% 20%, rgba(196, 238, 255, 0.5), transparent 22%),
-    linear-gradient(180deg, #f8fdff 0%, #eff9ff 38%, #f7fcff 100%);
+    radial-gradient(circle at top left, rgba(157, 223, 255, 0.55), transparent 22%),
+    radial-gradient(circle at 85% 16%, rgba(255, 229, 171, 0.42), transparent 18%),
+    radial-gradient(circle at 18% 80%, rgba(193, 244, 226, 0.46), transparent 20%),
+    linear-gradient(180deg, #cfefff 0%, #ecf9ff 34%, #f8fdff 100%);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --text-primary: #18324a;
-  --text-secondary: #567187;
-  --text-muted: #7f97aa;
-  --text-soft: #91a6b8;
+  --text-secondary: #5a7690;
+  --text-muted: #7f99ad;
+  --text-soft: #8ea8b8;
 }
 
 * {
@@ -35,6 +36,7 @@ body,
 body {
   margin: 0;
   min-width: 320px;
+  overflow: hidden;
 }
 
 button,
