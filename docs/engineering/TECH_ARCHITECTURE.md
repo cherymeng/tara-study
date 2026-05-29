@@ -1,4 +1,4 @@
-# Tara Study - 技术架构系统（Tech Architecture）
+# 桐宝学习 - 技术架构系统（Tech Architecture）
 
 # 1. 系统定位
 
@@ -13,7 +13,7 @@ Tech Architecture 用于定义：
 
 目标：
 
-# 支持 Tara Study 从 MVP 平滑成长为长期儿童成长平台。
+# 支持 桐宝学习 从 MVP 平滑成长为长期儿童成长平台。
 
 ---
 

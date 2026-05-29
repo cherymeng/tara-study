@@ -1,4 +1,4 @@
-# Tara Study - 开发规范文档（Development Guidelines）
+# 桐宝学习 - 开发规范文档（Development Guidelines）
 
 # 1. 文档目标
 
@@ -13,9 +13,9 @@
 
 # 2. 技术栈规范
 
-- 前端：React + Vite + TypeScript（可选）
-- 样式：Tailwind CSS / CSS Modules
-- 动画：Framer Motion
+- 前端：React + Vite + TypeScript
+- 样式：CSS（当前 MVP 落地）
+- 动画：Framer Motion（扩展预留）
 - 状态管理：Zustand + Context API
 - 后端：Supabase / Firebase
 - 数据格式：JSON / Markdown
@@ -27,11 +27,16 @@
 ```text
 src/
   app/
-    App.jsx
-    routes.jsx
+    App.tsx
+    router.tsx
   pages/
-    child/
-    parent/
+    HomePage.tsx
+    TasksPage.tsx
+    PetPage.tsx
+    WorldPage.tsx
+    AchievementsPage.tsx
+    ParentPage.tsx
+  layouts/
   components/
     task/
     growth/
@@ -41,21 +46,13 @@ src/
     ai/
     parent/
     common/
-  store/
-    userStore.js
-    taskStore.js
-    growthStore.js
-    petStore.js
-    worldStore.js
-    achievementStore.js
-    parentStore.js
-  data/
-    curriculum/
-    tasks/
-    growth/
+  stores/
+    userStore.ts
+    taskStore.ts
+    petStore.ts
+    worldStore.ts
+  mock/
   hooks/
-  services/
-  styles/
   utils/
 
 ```

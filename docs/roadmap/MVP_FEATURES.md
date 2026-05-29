@@ -1,4 +1,4 @@
-# Tara Study - MVP 功能清单（MVP Features）
+# 桐宝学习 - MVP 功能清单（MVP Features）
 
 # 1. MVP 目标
 

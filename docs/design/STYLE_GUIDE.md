@@ -1,8 +1,8 @@
-# Tara Study - 设计规范系统（Style Guide）
+# 桐宝学习 - 设计规范系统（Style Guide）
 
 # 1. 系统定位
 
-Style Guide 是 Tara Study 的统一设计规范。
+Style Guide 是 桐宝学习 的统一设计规范。
 
 目标：
 
@@ -515,7 +515,7 @@ AI角色：
 
 # 18. 最终目标
 
-让 Tara Study：
+让 桐宝学习：
 
 不仅是：
 

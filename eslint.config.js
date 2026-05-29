@@ -5,7 +5,14 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist', '.vercel', 'tablet_optimized_study_dashboard_v_3.jsx']),
+  globalIgnores([
+    'dist',
+    '.vercel',
+    '.idea',
+    'backup_tablet_dashboard.jsx',
+    'tablet_optimized_study_dashboard_v_3.jsx',
+    'tablet_optimized_study_dashboard_v_3-1.jsx',
+  ]),
   {
     files: ['**/*.{js,jsx}'],
     extends: [

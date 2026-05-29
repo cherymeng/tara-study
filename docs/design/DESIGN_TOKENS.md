@@ -1,4 +1,4 @@
-# Tara Study - 设计 Tokens 系统（Design Tokens）
+# 桐宝学习 - 设计 Tokens 系统（Design Tokens）
 
 # 1. 系统定位
 

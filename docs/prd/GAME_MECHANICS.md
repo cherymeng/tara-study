@@ -1,8 +1,8 @@
-# Tara Study - 游戏化成长机制（Game Mechanics）
+# 桐宝学习 - 游戏化成长机制（Game Mechanics）
 
 # 1. 系统定位
 
-Game Mechanics 是 Tara Study 的长期成长驱动系统。
+Game Mechanics 是 桐宝学习 的长期成长驱动系统。
 
 目标：
 

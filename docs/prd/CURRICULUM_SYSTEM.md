@@ -1,8 +1,8 @@
-# Tara Study - 核心成长循环系统（Core Loop）
+# 桐宝学习 - 核心成长循环系统（Core Loop）
 
 # 1. 核心理念
 
-Tara Study 的核心不是：
+桐宝学习 的核心不是：
 
 -   打卡
 -   刷题

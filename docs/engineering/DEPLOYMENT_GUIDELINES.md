@@ -1,4 +1,4 @@
-# Tara Study - 部署规范文档（Deployment Guidelines）
+# 桐宝学习 - 部署规范文档（Deployment Guidelines）
 
 ## 1. 文档目标
 
@@ -153,7 +153,7 @@ SUPABASE_ANON_KEY=xxxx
 ### 6.2 前端生产环境 `.env` 配置
 
 ```dotenv
-VITE_API_BASE_URL=https://prod-api.tara-study.com
+VITE_API_BASE_URL=https://prod-api.tongbao-study.com
 SUPABASE_URL=https://xxxx.supabase.co
 SUPABASE_ANON_KEY=xxxx
 ```

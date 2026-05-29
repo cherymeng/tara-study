@@ -1,8 +1,8 @@
-# Tara Study - 家长协同系统（Parent System）
+# 桐宝学习 - 家长协同系统（Parent System）
 
 # 1. 系统定位
 
-Parent System 是 Tara Study 的家庭协同成长系统。
+Parent System 是 桐宝学习 的家庭协同成长系统。
 
 目标：
 
@@ -37,7 +37,7 @@ Parent System 的核心目标：
 * 学习稳定性
 * 长期成长趋势
 
-Tara Study 需要：
+桐宝学习 需要：
 
 # 把成长可视化。
 

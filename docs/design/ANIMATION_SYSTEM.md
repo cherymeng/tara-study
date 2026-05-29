@@ -1,8 +1,8 @@
-# Tara Study - 动画系统（Animation System）
+# 桐宝学习 - 动画系统（Animation System）
 
 # 1. 系统定位
 
-动画系统是 Tara Study 核心体验之一。
+动画系统是 桐宝学习 核心体验之一。
 
 目标：
 

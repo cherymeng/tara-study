@@ -12,22 +12,17 @@ const navItems = [
 
 export function SidebarNav() {
   return (
-    <aside className="flex flex-col items-center gap-4 rounded-[32px] bg-white p-4 shadow-sm">
+    <aside className="sidebar">
       {navItems.map((item) => (
         <NavLink
           key={item.path}
           to={item.path}
           className={({ isActive }) =>
-            [
-              "flex h-16 w-16 flex-col items-center justify-center rounded-3xl text-sm transition",
-              isActive
-                ? "bg-blue-100 text-blue-700"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200",
-            ].join(" ")
+            ["nav-item", isActive ? "active" : ""].filter(Boolean).join(" ")
           }
         >
-          <span className="text-2xl">{item.icon}</span>
-          <span className="mt-1 text-xs">{item.label}</span>
+          <span className="nav-icon">{item.icon}</span>
+          <span className="nav-label">{item.label}</span>
         </NavLink>
       ))}
     </aside>

@@ -1,4 +1,4 @@
-# Tara Study
+# 桐宝学习
 
 儿童成长学习打卡产品（MVP）
 
@@ -6,7 +6,7 @@
 
 # 项目简介
 
-Tara Study 是一个面向 6~12 岁儿童的成长型学习产品。
+桐宝学习 是一个面向 6~12 岁儿童的成长型学习产品。
 
 产品通过：
 
@@ -113,8 +113,8 @@ Tara Study 是一个面向 6~12 岁儿童的成长型学习产品。
 
 ## UI
 
-- TailwindCSS
-- Framer Motion
+- CSS
+- Framer Motion（预留）
 
 ## 数据
 
@@ -132,21 +132,22 @@ MVP阶段：
 # 项目结构
 
 ```text
-tara-study
+tongbao-study
 ├── docs
 ├── public
 ├── src
 │
-├── components
+├── app
+├── layouts
 ├── pages
 ├── stores
-├── services
 ├── mock
 ├── hooks
+├── utils
 ├── constants
 ├── types
 │
-└── App.tsx
+└── main.tsx
 ```
 
 详细说明：
@@ -218,6 +219,19 @@ AI能力暂不开发。
 ---
 
 # 本地运行
+
+```bash
+npm install
+npm run dev
+```
+
+质量检查：
+
+```bash
+npm run build
+npm run typecheck
+npm run lint
+```
 
 安装依赖：
 

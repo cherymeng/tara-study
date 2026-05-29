@@ -1,4 +1,4 @@
-# Tara Study - 数据库与数据结构设计（Database Schema）
+# 桐宝学习 - 数据库与数据结构设计（Database Schema）
 
 # 1. 用户表（Users）
 

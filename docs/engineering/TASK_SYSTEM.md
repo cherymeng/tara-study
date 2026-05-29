@@ -1,8 +1,8 @@
-# Tara Study - 任务系统设计（Task System）
+# 桐宝学习 - 任务系统设计（Task System）
 
 # 1. 系统定位
 
-任务系统是 Tara Study 的核心执行模块。
+任务系统是 桐宝学习 的核心执行模块。
 
 目标：
 

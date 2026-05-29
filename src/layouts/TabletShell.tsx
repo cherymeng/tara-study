@@ -4,11 +4,11 @@ import { GrowthPanel } from "./GrowthPanel";
 
 export function TabletShell() {
   return (
-    <div className="min-h-screen bg-slate-50 p-6">
-      <div className="grid min-h-[calc(100vh-48px)] grid-cols-[96px_1fr_300px] gap-6">
+    <div className="app-shell">
+      <div className="tablet-grid">
         <SidebarNav />
 
-        <main className="rounded-[32px] bg-white p-8 shadow-sm">
+        <main className="main-panel">
           <Outlet />
         </main>
 

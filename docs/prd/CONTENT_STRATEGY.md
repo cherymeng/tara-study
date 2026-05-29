@@ -1,8 +1,8 @@
-# Tara Study - 内容战略系统（Content Strategy）
+# 桐宝学习 - 内容战略系统（Content Strategy）
 
 # 1. 系统定位
 
-Content Strategy 是 Tara Study 的长期内容体系。
+Content Strategy 是 桐宝学习 的长期内容体系。
 
 目标：
 
@@ -16,7 +16,7 @@ Content Strategy 是 Tara Study 的长期内容体系。
 
 # 2. 内容系统核心理念
 
-Tara Study 的内容：
+桐宝学习 的内容：
 
 不是：
 

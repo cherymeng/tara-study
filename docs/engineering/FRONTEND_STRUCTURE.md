@@ -1,4 +1,4 @@
-# Tara Study - 前端工程结构设计（Frontend Structure）
+# 桐宝学习 - 前端工程结构设计（Frontend Structure）
 
 # 1. 技术栈
 
@@ -6,10 +6,10 @@
 
 * React
 * Vite
-* JavaScript / TypeScript
-* CSS Modules / Tailwind CSS
-* Framer Motion
-* Hanzi Writer
+* TypeScript
+* CSS（当前 MVP 落地）
+* Framer Motion（动画扩展预留）
+* Hanzi Writer（专项练习扩展预留）
 * LocalStorage / IndexedDB
 * 后续可接入 Supabase / Firebase
 
@@ -38,30 +38,27 @@
 ```text
 src/
   app/
-    App.jsx
-    routes.jsx
+    App.tsx
+    router.tsx
 
   pages/
-    child/
-      HomePage.jsx
-      TodayTasksPage.jsx
-      SubjectPage.jsx
-      GrowthPage.jsx
-      WorldPage.jsx
-      PetPage.jsx
-      AchievementsPage.jsx
-      ExplorationPage.jsx
+    HomePage.tsx
+    TasksPage.tsx
+    PetPage.tsx
+    WorldPage.tsx
+    AchievementsPage.tsx
+    ParentPage.tsx
 
-    parent/
-      ParentDashboardPage.jsx
-      ReportPage.jsx
-      RewardSettingsPage.jsx
+  layouts/
+    TabletShell.tsx
+    SidebarNav.tsx
+    GrowthPanel.tsx
 
   components/
     task/
-      TaskCard.jsx
-      TaskList.jsx
-      TaskProgress.jsx
+      TaskCard.tsx
+      TaskList.tsx
+      TaskProgress.tsx
 
     growth/
       XPBar.jsx
@@ -412,7 +409,7 @@ MVP阶段可以先使用：
 
 # 11. 最终目标
 
-前端工程要支持 Tara Study 从 MVP 平滑演进到完整儿童成长系统。
+前端工程要支持 桐宝学习 从 MVP 平滑演进到完整儿童成长系统。
 
 核心目标：
 

@@ -1,8 +1,8 @@
-# Tara Study - 奖励与正反馈系统（Reward System）
+# 桐宝学习 - 奖励与正反馈系统（Reward System）
 
 # 1. 系统定位
 
-Reward System 是 Tara Study 的成长反馈系统。
+Reward System 是 桐宝学习 的成长反馈系统。
 
 目标：
 
@@ -28,7 +28,7 @@ Reward System 是 Tara Study 的成长反馈系统。
 * 只有考试结果
 * 缺少成长体验
 
-Tara Study：
+桐宝学习：
 
 # 每一次成长，
 

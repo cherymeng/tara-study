@@ -1,8 +1,8 @@
-# Tara Study - AI探索成长系统（AI Exploration System）
+# 桐宝学习 - AI探索成长系统（AI Exploration System）
 
 # 1. 系统定位
 
-AI探索成长系统是Tara Study差异化核心模块，旨在培养：
+AI探索成长系统是桐宝学习差异化核心模块，旨在培养：
 
 - 好奇心
 - 创造力

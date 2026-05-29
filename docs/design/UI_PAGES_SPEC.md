@@ -1,4 +1,4 @@
-# Tara Study - UI 页面规格文档（UI Pages Spec）
+# 桐宝学习 - UI 页面规格文档（UI Pages Spec）
 
 # 1. 系统定位
 

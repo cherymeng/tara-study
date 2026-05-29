@@ -1,4 +1,4 @@
-# Tara Study - 项目里程碑与开发时间线（Milestones & Timeline）
+# 桐宝学习 - 项目里程碑与开发时间线（Milestones & Timeline）
 
 # 1. 文档目标
 
@@ -14,7 +14,7 @@
 
 # 2. 产品开发核心原则
 
-Tara Study 的开发原则：
+桐宝学习 的开发原则：
 
 # 小步快跑
 

@@ -1,8 +1,8 @@
-# Tara Study - AI成长伙伴系统（AI Companion System）
+# 桐宝学习 - AI成长伙伴系统（AI Companion System）
 
 # 1. 系统定位
 
-AI Companion System 是 Tara Study 的长期陪伴系统。
+AI Companion System 是 桐宝学习 的长期陪伴系统。
 
 AI 不只是：
 

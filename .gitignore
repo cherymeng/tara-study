@@ -2,3 +2,5 @@ node_modules/
 dist/
 .DS_Store
 .vercel
+.idea/
+backup_tablet_dashboard.jsx

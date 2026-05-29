@@ -1,8 +1,8 @@
-# Tara Study - UI 视觉与交互系统（UI System）
+# 桐宝学习 - UI 视觉与交互系统（UI System）
 
 # 1. 系统定位
 
-UI System 是 Tara Study 的核心体验系统。
+UI System 是 桐宝学习 的核心体验系统。
 
 目标：
 
@@ -580,7 +580,7 @@ AI 必须：
 
 # 17. 产品气质总结
 
-Tara Study 整体气质：
+桐宝学习 整体气质：
 
 # 温暖成长型未来学习世界。
 

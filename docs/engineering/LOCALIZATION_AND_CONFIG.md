@@ -1,4 +1,4 @@
-# Tara Study - 配置与国际化系统（Localization & Config）
+# 桐宝学习 - 配置与国际化系统（Localization & Config）
 
 # 1. 文档目标
 
