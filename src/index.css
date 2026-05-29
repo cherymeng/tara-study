@@ -327,6 +327,19 @@ a {
   border-color: #a7f3d0;
 }
 
+.hanzi-task-card,
+.review-card {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.hanzi-task-card.is-completed {
+  background: linear-gradient(180deg, #f0fdf4, #ffffff);
+  border-color: #bbf7d0;
+}
+
 .task-topline {
   display: flex;
   align-items: flex-start;
@@ -339,6 +352,166 @@ a {
 .achievement-icon {
   font-size: 42px;
   line-height: 1;
+}
+
+.xp-badge {
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  color: #92400e;
+  background: var(--color-amber-soft);
+  font-weight: 900;
+}
+
+.hanzi-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.hanzi-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #dbeafe;
+  border-radius: 18px;
+  background: #f8fbff;
+}
+
+.hanzi-char {
+  font-family:
+    "Songti SC", "STSong", "Noto Serif CJK SC", "PingFang SC", serif;
+  color: #1e3a8a;
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 900;
+  text-align: center;
+}
+
+.hanzi-pinyin {
+  margin-top: 8px;
+  color: var(--color-blue);
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.hanzi-words {
+  margin-top: 8px;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.hanzi-card p,
+.hanzi-card small {
+  display: block;
+  margin: 10px 0 0;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.submission-panel {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 20px;
+  background: #f8fafc;
+}
+
+.field-label,
+.inline-field {
+  color: var(--color-muted);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+textarea,
+.inline-field input {
+  width: 100%;
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: var(--color-text);
+  background: white;
+}
+
+textarea {
+  min-height: 78px;
+  resize: vertical;
+}
+
+.inline-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px;
+  align-items: center;
+  gap: 12px;
+}
+
+.submission-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.file-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  color: #475569;
+  background: #f1f5f9;
+  font-weight: 850;
+  overflow: hidden;
+}
+
+.file-button input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-button.is-disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.submission-result {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  color: #065f46;
+  background: #d1fae5;
+}
+
+.review-card {
+  display: grid;
+  gap: 16px;
+}
+
+.hanzi-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.hanzi-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #7c2d12;
+  background: #ffedd5;
+  font-weight: 850;
 }
 
 .pill {
@@ -510,6 +683,8 @@ a {
 
   .metric-card,
   .task-card,
+  .hanzi-task-card,
+  .review-card,
   .region-card,
   .achievement-card,
   .parent-card,
@@ -575,6 +750,10 @@ a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .hanzi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .grid-3 > :last-child:nth-child(odd) {
     grid-column: 1 / -1;
   }
@@ -607,5 +786,13 @@ a {
   .section-head {
     display: grid;
     align-items: start;
+  }
+
+  .hanzi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .inline-field {
+    grid-template-columns: 1fr;
   }
 }

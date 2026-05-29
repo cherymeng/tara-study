@@ -7,6 +7,7 @@
 ## 1. 产品文档 (PRD)
 
 - **产品愿景**：docs/prd/VISION.md
+- **二年级语文生字增长系统**：docs/prd/GRADE2_HANZI_SYSTEM.md
 - **核心成长循环**：docs/prd/CORE_LOOP.md
 - **课程体系设计**：docs/prd/COURSE_STRUCTURE.md
 - **任务系统**：docs/prd/TASK_SYSTEM.md
@@ -28,6 +29,7 @@
 ## 3. 工程文档 (Engineering)
 
 - **前端架构与状态管理**：docs/engineering/FRONTEND_ARCHITECTURE.md
+- **二年级生字任务引擎**：docs/engineering/HANZI_TASK_ENGINE.md
 - **Zustand 状态管理**：docs/engineering/ZUSTAND_STORE.md
 - **数据库与 API 设计**：docs/engineering/DATABASE_API.md
 - **部署规范**：docs/engineering/DEPLOYMENT.md

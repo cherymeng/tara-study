@@ -65,6 +65,36 @@
 
 ---
 
+## 3.2.1 hanziStore
+
+当前阶段新增二年级语文生字专项状态。
+
+存储：
+
+-   items：生字库与掌握度
+-   tasks：今日新学、复习、小测任务
+-   submissions：拍照/录音/阅读模拟提交记录
+-   reviews：家长评价记录
+
+操作：
+
+-   generateTodayTasks()
+-   startTask(taskId)
+-   submitTask(taskId, submission)
+-   reviewTask(taskId, rating, comment)
+-   getDueReviewItems(date)
+-   getFragileItems()
+-   getMasterySummary()
+
+关键规则：
+
+-   `submitTask` 后任务立即完成，并发放基础 XP。
+-   家长 `reviewTask` 不阻塞任务完成。
+-   家长评价为 `great` 时可以追加 XP。
+-   家长评价为 `practice_again` 时不扣 XP，只将生字标记为易忘并安排复习。
+
+---
+
 ## 3.3 growthStore
 
 存储：
@@ -176,6 +206,38 @@ achievementStore.unlockAchievement(if condition)
 parentStore.updateDailyReport()
 ↓
 触发动画/正反馈
+```
+
+### 生字打卡提交
+
+```text
+submitHanziTask(taskId)
+↓
+保存本地模拟上传记录
+↓
+hanziTask.status = completed
+↓
+立即发放基础 XP
+↓
+更新桐宝成长
+↓
+生成/更新复习计划
+↓
+家长端出现待评价记录
+```
+
+### 家长评价
+
+```text
+reviewHanziTask(taskId, rating)
+↓
+保存家长评价
+↓
+rating = great 时追加 XP
+↓
+根据评价更新掌握度
+↓
+安排下一次复习
 ```
 
 ---

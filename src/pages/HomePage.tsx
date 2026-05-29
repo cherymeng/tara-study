@@ -1,30 +1,35 @@
-import { useTaskStore } from "../stores/taskStore";
+import { useHanziStore } from "../stores/hanziStore";
 import { useUserStore } from "../stores/userStore";
 import { usePetStore } from "../stores/petStore";
 import { useWorldStore } from "../stores/worldStore";
-import { useTodayProgress } from "../hooks/useTodayProgress";
+import { summarizeHanziItems } from "../utils/hanzi";
 
 export function HomePage() {
-  const tasks = useTaskStore((state) => state.tasks);
-  const completeTask = useTaskStore((state) => state.completeTask);
+  const tasks = useHanziStore((state) => state.tasks);
+  const items = useHanziStore((state) => state.items);
+  const getTaskItems = useHanziStore((state) => state.getTaskItems);
+  const summary = summarizeHanziItems(items);
   const user = useUserStore();
   const pet = usePetStore();
   const regions = useWorldStore((state) => state.regions);
-  const { completedCount, progress, totalXp } = useTodayProgress(tasks);
+
+  const completedCount = tasks.filter((task) => task.status === "completed").length;
+  const progress = Math.round((completedCount / tasks.length) * 100);
+  const totalXp = tasks.reduce((sum, task) => sum + task.baseXp, 0);
 
   return (
     <div className="stack">
       <section className="hero">
         <p className="eyebrow">欢迎回来</p>
-        <h1 className="title">{user.name}，今天也要继续成长！</h1>
+        <h1 className="title">{user.name}，今天认识更多汉字！</h1>
         <p className="subtitle">
-          桐宝正在等你完成今日任务。完成学习、获得 XP、照顾宠物，再解锁新的世界。
+          今天先专注二年级语文生字：新学、复习和小测都会让桐宝一起成长。
         </p>
       </section>
 
       <section className="grid-3">
         <div className="metric-card metric-blue">
-          <p className="card-label">今日任务进度</p>
+          <p className="card-label">今日生字任务</p>
           <p className="card-value value-blue">
             {completedCount}/{tasks.length}
           </p>
@@ -35,52 +40,62 @@ export function HomePage() {
         </div>
 
         <div className="metric-card metric-amber">
-          <p className="card-label">宠物状态</p>
-          <div className="task-topline">
-            <div className="pet-emoji">🐣</div>
-            <div>
-              <p className="card-value value-amber">{pet.name}</p>
-              <p className="muted">心情：{pet.mood}</p>
-            </div>
-          </div>
+          <p className="card-label">识字进度</p>
+          <p className="card-value value-amber">
+            {summary.learned}/{summary.total}
+          </p>
+          <p className="muted">
+            易忘 {summary.fragile} 个，待复习 {summary.dueReview} 个
+          </p>
         </div>
 
         <div className="metric-card metric-green">
-          <p className="card-label">连续打卡</p>
-          <p className="card-value value-green">{user.streakDays} 天</p>
-          <p className="muted">坚持很棒，继续保持。</p>
+          <p className="card-label">桐宝状态</p>
+          <div className="task-topline">
+            <div className="pet-emoji">🐣</div>
+            <div>
+              <p className="card-value value-green">{pet.name}</p>
+              <p className="muted">心情：{pet.mood}</p>
+            </div>
+          </div>
         </div>
       </section>
 
       <section>
         <div className="section-head">
           <div>
-            <h2 className="section-title">今日任务</h2>
-            <p className="section-desc">点击卡片完成任务并获得 XP</p>
+            <h2 className="section-title">今日安排</h2>
+            <p className="section-desc">
+              提交打卡后立即获得基础 XP，家长好评还能追加 XP。
+            </p>
           </div>
-          <div className="pill">今日奖励：XP +{totalXp}</div>
+          <div className="pill">基础奖励：XP +{totalXp}</div>
         </div>
 
-        <div className="grid-2">
-          {tasks.map((task) => (
-            <button
-              key={task.id}
-              disabled={task.completed}
-              onClick={() => completeTask(task.id)}
-              className={["task-card", task.completed ? "is-completed" : ""]
-                .filter(Boolean)
-                .join(" ")}
-            >
-              <div className="task-topline">
-                <div className="task-icon">{task.completed ? "🎉" : "⭐"}</div>
-                <div className="pill">XP +{task.xp}</div>
-              </div>
-              <h3 className="task-title">{task.title}</h3>
-              <p className="task-desc">
-                {task.completed ? "已完成，太棒啦！" : "点击完成这个成长任务"}
-              </p>
-            </button>
-          ))}
+        <div className="grid-3">
+          {tasks.map((task) => {
+            const items = getTaskItems(task.id);
+            return (
+              <article
+                key={task.id}
+                className={[
+                  "task-card",
+                  task.status === "completed" ? "is-completed" : "",
+                ].join(" ")}
+              >
+                <div className="task-topline">
+                  <div className="task-icon">
+                    {task.status === "completed" ? "✅" : "字"}
+                  </div>
+                  <div className="pill">XP +{task.baseXp}</div>
+                </div>
+                <h3 className="task-title">{task.title}</h3>
+                <p className="task-desc">
+                  {items.map((item) => item.character).join("、")}
+                </p>
+              </article>
+            );
+          })}
         </div>
       </section>
 
