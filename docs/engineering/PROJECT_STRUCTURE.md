@@ -163,7 +163,7 @@ TabletShell
 \`\`\`text
 宠物状态
 用户等级
-XP 进度
+积分 进度
 连续打卡
 今日鼓励
 \`\`\`
@@ -304,7 +304,7 @@ PetLevelCard
 成长相关组件：
 
 \`\`\`text
-XPBar
+积分Bar
 LevelBadge
 StreakCard
 GrowthSummary
@@ -347,7 +347,7 @@ MVP 使用 Zustand。
 \`\`\`text
 用户名称
 等级
-XP
+积分
 连续打卡天数
 \`\`\`
 
