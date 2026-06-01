@@ -7,7 +7,7 @@
 -   前端全局状态
 -   数据流向
 -   状态更新逻辑
--   与任务、XP、宠物、世界、成就、家长端的绑定
+-   与任务、积分、宠物、世界、成就、家长端的绑定
 
 目标：
 
@@ -20,7 +20,7 @@
 1.  **单一来源**
     -   所有成长相关状态集中管理
 2.  **可追踪**
-    -   任务、XP、等级、宠物变化可记录
+    -   任务、积分、等级、宠物变化可记录
 3.  **可恢复**
     -   本地缓存 + 云端同步
 4.  **分模块**
@@ -88,10 +88,10 @@
 
 关键规则：
 
--   `submitTask` 后任务立即完成，并发放基础 XP。
+-   `submitTask` 后任务立即完成，并发放基础 积分。
 -   家长 `reviewTask` 不阻塞任务完成。
--   家长评价为 `great` 时可以追加 XP。
--   家长评价为 `practice_again` 时不扣 XP，只将生字标记为易忘并安排复习。
+-   家长评价为 `great` 时可以追加 积分。
+-   家长评价为 `practice_again` 时不扣 积分，只将生字标记为易忘并安排复习。
 
 ---
 
@@ -99,7 +99,7 @@
 
 存储：
 
--   currentXP
+-   current积分
 -   level
 -   streakDays
 -   totalTasksCompleted
@@ -107,7 +107,7 @@
 
 操作：
 
--   addXP(amount)
+-   add积分(amount)
 -   checkLevelUp()
 -   updateStreak()
 -   resetStreak()
@@ -193,7 +193,7 @@ completeTask(taskId)
 ↓
 taskStore.completedTasks更新
 ↓
-growthStore.addXP(task.xpReward)
+growthStore.add积分(task.xpReward)
 ↓
 growthStore.checkLevelUp()
 ↓
@@ -217,7 +217,7 @@ submitHanziTask(taskId)
 ↓
 hanziTask.status = completed
 ↓
-立即发放基础 XP
+立即发放基础 积分
 ↓
 更新桐宝成长
 ↓
@@ -233,7 +233,7 @@ reviewHanziTask(taskId, rating)
 ↓
 保存家长评价
 ↓
-rating = great 时追加 XP
+rating = great 时追加 积分
 ↓
 根据评价更新掌握度
 ↓
@@ -253,7 +253,7 @@ rating = great 时追加 XP
 -   MVP阶段：Zustand + Context API
 -   中期：Redux Toolkit（可选）
 -   动画状态：Framer Motion + Motion Values
--   XP与成长循环：独立模块，和UI解耦
+-   积分与成长循环：独立模块，和UI解耦
 
 
 # 7. 最终目标
@@ -262,7 +262,7 @@ rating = great 时追加 XP
 
 -   所有成长循环动作可追踪、可重放
 -   数据与UI一致
--   宠物、世界、XP、成就、家长报告同步
+-   宠物、世界、积分、成就、家长报告同步
 -   前端易开发、易扩展
 -   后期可平滑接入 AI 功能
 
@@ -277,7 +277,7 @@ rating = great 时追加 XP
 - 文本国际化（i18n）预留结构  
 - 年级学科内容配置  
 - 任务配置  
-- XP、等级、宠物、世界参数可调  
+- 积分、等级、宠物、世界参数可调  
 
 这是保证产品可持续迭代、快速上线不同年级/版本的关键文档。
 ```
