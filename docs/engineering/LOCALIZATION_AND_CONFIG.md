@@ -29,7 +29,7 @@
 避免：
 
 * 大量写死逻辑
-* 难以调整XP
+* 难以调整积分
 * 难以增加新世界
 
 ---
@@ -99,7 +99,7 @@ src/locales/
 
 包括：
 
-* XP
+* 积分
 * 等级
 * 宠物
 * 世界
@@ -108,7 +108,7 @@ src/locales/
 
 ---
 
-# 7. XP 配置系统
+# 7. 积分 配置系统
 
 推荐结构：
 
@@ -136,9 +136,9 @@ src/locales/
 ```json id="uwqfjm"
 {
   "levels": [
-    { "level": 1, "requiredXP": 0 },
-    { "level": 2, "requiredXP": 100 },
-    { "level": 3, "requiredXP": 250 }
+    { "level": 1, "required积分": 0 },
+    { "level": 2, "required积分": 100 },
+    { "level": 3, "required积分": 250 }
   ]
 }
 ```
