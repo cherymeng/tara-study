@@ -88,7 +88,7 @@ npm run dev
 
 - 用户表（`user`）
 - 任务表（`task`）
-- XP / 等级表（`growth`）
+- 积分 / 等级表（`growth`）
 - 宠物表（`pet`）
 - 世界表（`world`）
 - 成就表（`achievement`）
@@ -169,7 +169,7 @@ SUPABASE_ANON_KEY=xxxx
 ### 7.1 确认功能完成
 
 - 任务系统
-- XP / 等级系统
+- 积分 / 等级系统
 - 宠物系统
 - 成就系统
 - 家长报告系统
@@ -195,7 +195,7 @@ SUPABASE_ANON_KEY=xxxx
 - 前端错误收集：Sentry / LogRocket
 - 后端日志：Supabase Logs / Node.js Logging
 - 数据统计：GA / 自定义事件埋点
-- 核心监控：任务完成率、XP 变化、Streak 形成
+- 核心监控：任务完成率、积分 变化、Streak 形成
 
 ## 9. 部署规范总结
 

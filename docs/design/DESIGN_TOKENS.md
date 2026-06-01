@@ -16,7 +16,7 @@ Design Tokens 是前端工程化的基础：
 | 名称 | HEX | 用途 |
 |------|-----|------|
 | brand-blue | #4A90E2 | 主色，核心成长模块、按钮 |
-| warm-yellow | #F5C74B | XP奖励、成就 |
+| warm-yellow | #F5C74B | 积分奖励、成就 |
 | explore-green | #7ED321 | 探索任务、阅读 |
 | dream-purple | #9B51E0 | AI探索、稀有奖励 |
 | bg-light | #FFF8F0 | 页面背景 |
@@ -75,7 +75,7 @@ Design Tokens 是前端工程化的基础：
 
 | 名称 | CSS / Framer Motion | 用途 |
 |------|------------------|------|
-| motion-fast | 0.2s ease-out | XP增量、按钮反馈 |
+| motion-fast | 0.2s ease-out | 积分增量、按钮反馈 |
 | motion-medium | 0.5s ease-out | 成长动画、宠物互动 |
 | motion-slow | 0.8s ease-out | 世界解锁、升级 |
 | motion-ease | cubic-bezier(0.4,0,0.2,1) | 通用缓动 |

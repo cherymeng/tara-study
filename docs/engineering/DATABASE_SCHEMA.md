@@ -14,7 +14,7 @@
 
 ---
 
-# 2. XP与等级表（Growth System）
+# 2. 积分与等级表（Growth System）
 
 | 字段 | 类型 | 描述 |
 |------|------|------|
@@ -37,7 +37,7 @@
 | subject | enum('chinese','math','english','ai','experiment','creative') | 学科或探索类型 |
 | grade | int | 年级 |
 | content | text | 任务内容/题目描述 |
-| xp_reward | int | 完成奖励XP |
+| xp_reward | int | 完成奖励积分 |
 | status | enum('pending','in_progress','completed','review') | 任务状态 |
 | created_at | timestamp | 创建时间 |
 | updated_at | timestamp | 更新时间 |
@@ -82,7 +82,7 @@
 | user_id | UUID | 对应用户 |
 | task_name | varchar | 任务名称 |
 | description | text | 任务描述 |
-| xp_reward | int | 完成奖励XP |
+| xp_reward | int | 完成奖励积分 |
 | status | enum('pending','in_progress','completed') | 状态 |
 | created_at | timestamp | 创建时间 |
 | updated_at | timestamp | 更新时间 |
@@ -98,7 +98,7 @@
 | name | varchar | 成就名称 |
 | description | text | 成就描述 |
 | type | enum('learning','streak','exploration','creative') | 成就类型 |
-| reward_xp | int | 奖励XP |
+| reward_xp | int | 奖励积分 |
 | unlocked | boolean | 是否解锁 |
 | unlock_date | timestamp | 解锁时间 |
 | created_at | timestamp | 创建时间 |
@@ -123,7 +123,7 @@
 
 # 9. 数据结构原则
 
-- 所有成长行为统一绑定 XP 系统
+- 所有成长行为统一绑定 积分 系统
 - 校内/校外任务统一进入成长循环
 - 宠物/世界/成就/AI探索均与成长循环挂钩
 - 家长端实时获取孩子成长数据

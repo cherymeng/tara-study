@@ -61,7 +61,7 @@ src/
       TaskProgress.tsx
 
     growth/
-      XPBar.jsx
+      积分Bar.jsx
       LevelBadge.jsx
       StreakCard.jsx
       GrowthTimeline.jsx
@@ -153,7 +153,7 @@ src/
 
 * 今日成长状态
 * 今日任务
-* XP进度
+* 积分进度
 * 宠物状态
 * 连续成长天数
 * 世界探索入口
@@ -179,7 +179,7 @@ src/
 * 任务名称
 * 所属学科
 * 难度
-* XP奖励
+* 积分奖励
 * 完成状态
 * 开始按钮
 
@@ -208,7 +208,7 @@ src/
 展示：
 
 * 当前等级
-* XP进度
+* 积分进度
 * 成长曲线
 * 连续成长
 * 能力值
@@ -283,14 +283,14 @@ src/
 
 ---
 
-## 5.2 XPBar
+## 5.2 积分Bar
 
 用于展示成长进度。
 
 字段：
 
-* currentXP
-* nextLevelXP
+* current积分
+* nextLevel积分
 * level
 
 ---
@@ -340,7 +340,7 @@ src/
 
 * userStore：用户、年级、角色
 * taskStore：每日任务、任务状态
-* growthStore：XP、等级、连续成长
+* growthStore：积分、等级、连续成长
 * petStore：宠物等级、宠物状态
 * worldStore：世界解锁
 * parentStore：家长报告
@@ -354,7 +354,7 @@ src/
 ```text
 点击完成任务
 → 更新任务状态
-→ 计算XP奖励
+→ 计算积分奖励
 → 更新成长值
 → 判断是否升级
 → 判断宠物是否成长
@@ -369,7 +369,7 @@ src/
 
 推荐使用 Framer Motion：
 
-* XP增长动画
+* 积分增长动画
 * 任务完成动画
 * 升级动画
 * 宠物互动动画
