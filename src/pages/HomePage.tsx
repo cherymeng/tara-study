@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import { useHanziStore } from "../stores/hanziStore";
 import { useUserStore } from "../stores/userStore";
-import { usePetStore } from "../stores/petStore";
 import { useWorldStore } from "../stores/worldStore";
 import { summarizeHanziItems } from "../utils/hanzi";
+import { ROUTES } from "../constants/routes";
 
 export function HomePage() {
   const tasks = useHanziStore((state) => state.tasks);
@@ -10,12 +11,11 @@ export function HomePage() {
   const getTaskItems = useHanziStore((state) => state.getTaskItems);
   const summary = summarizeHanziItems(items);
   const user = useUserStore();
-  const pet = usePetStore();
   const regions = useWorldStore((state) => state.regions);
 
   const completedCount = tasks.filter((task) => task.status === "completed").length;
-  const progress = Math.round((completedCount / tasks.length) * 100);
-  const totalXp = tasks.reduce((sum, task) => sum + task.baseXp, 0);
+  const unfinishedCount = tasks.length - completedCount;
+  const totalPoints = tasks.reduce((sum, task) => sum + task.baseXp, 0);
 
   return (
     <div className="stack">
@@ -27,38 +27,29 @@ export function HomePage() {
         </p>
       </section>
 
-      <section className="grid-3">
-        <div className="metric-card metric-blue">
-          <p className="card-label">今日生字任务</p>
-          <p className="card-value value-blue">
-            {completedCount}/{tasks.length}
-          </p>
-          <div className="progress-track">
-            <div className="progress-fill" style={{ width: `${progress}%` }} />
-          </div>
-          <p className="muted">完成度 {progress}%</p>
-        </div>
+      <section className="home-action-grid">
+        <Link to={ROUTES.TASKS} className="home-action-button metric-blue">
+          <span className="card-label">今日任务</span>
+          <strong className="card-value value-blue">
+            {unfinishedCount > 0 ? `未完成 ${unfinishedCount} 项` : "全部完成"}
+          </strong>
+          <span className="muted">
+            已完成 {completedCount}/{tasks.length}
+          </span>
+        </Link>
 
-        <div className="metric-card metric-amber">
-          <p className="card-label">识字进度</p>
-          <p className="card-value value-amber">
+        <Link
+          to={ROUTES.HANZI_REPOSITORY}
+          className="home-action-button metric-amber"
+        >
+          <span className="card-label">识字量</span>
+          <strong className="card-value value-amber">
             {summary.learned}/{summary.total}
-          </p>
-          <p className="muted">
-            易忘 {summary.fragile} 个，待复习 {summary.dueReview} 个
-          </p>
-        </div>
-
-        <div className="metric-card metric-green">
-          <p className="card-label">桐宝状态</p>
-          <div className="task-topline">
-            <div className="pet-emoji">🐣</div>
-            <div>
-              <p className="card-value value-green">{pet.name}</p>
-              <p className="muted">心情：{pet.mood}</p>
-            </div>
-          </div>
-        </div>
+          </strong>
+          <span className="muted">
+            熟悉 {summary.mastered} 个，认识 {summary.learned} 个
+          </span>
+        </Link>
       </section>
 
       <section>
@@ -66,10 +57,10 @@ export function HomePage() {
           <div>
             <h2 className="section-title">今日安排</h2>
             <p className="section-desc">
-              提交打卡后立即获得基础 XP，家长好评还能追加 XP。
+              提交打卡后立即获得基础积分，家长好评还能追加积分。
             </p>
           </div>
-          <div className="pill">基础奖励：XP +{totalXp}</div>
+          <div className="pill">基础奖励：积分 +{totalPoints}</div>
         </div>
 
         <div className="grid-3">
@@ -87,7 +78,7 @@ export function HomePage() {
                   <div className="task-icon">
                     {task.status === "completed" ? "✅" : "字"}
                   </div>
-                  <div className="pill">XP +{task.baseXp}</div>
+                  <div className="pill">积分 +{task.baseXp}</div>
                 </div>
                 <h3 className="task-title">{task.title}</h3>
                 <p className="task-desc">

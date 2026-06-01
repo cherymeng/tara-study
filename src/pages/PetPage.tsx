@@ -33,7 +33,7 @@ export function PetPage() {
         <div className="metric-card metric-green">
           <p className="card-label">学习者等级</p>
           <p className="card-value value-green">Lv.{user.level}</p>
-          <p className="muted">XP：{getLevelProgressLabel(user.xp)}</p>
+          <p className="muted">积分：{getLevelProgressLabel(user.xp)}</p>
         </div>
       </section>
 

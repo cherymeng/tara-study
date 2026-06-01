@@ -23,7 +23,11 @@ interface HanziState {
   reviews: ParentReview[];
 
   startTask: (taskId: string) => void;
-  submitTask: (taskId: string, submission: HanziSubmissionInput) => void;
+  submitTask: (
+    taskId: string,
+    submission: HanziSubmissionInput,
+    awardAmount?: number,
+  ) => void;
   reviewTask: (
     taskId: string,
     rating: ParentReviewRating,
@@ -165,7 +169,7 @@ export const useHanziStore = create<HanziState>((set, get) => ({
       return { tasks };
     }),
 
-  submitTask: (taskId, submissionInput) => {
+  submitTask: (taskId, submissionInput, awardAmount) => {
     const task = get().tasks.find((item) => item.id === taskId);
     if (!task || task.status === "completed") return;
 
@@ -194,7 +198,7 @@ export const useHanziStore = create<HanziState>((set, get) => ({
       return { items, tasks, submissions };
     });
 
-    awardXp(task.baseXp);
+    awardXp(awardAmount ?? task.baseXp);
   },
 
   reviewTask: (taskId, rating, comment) => {

@@ -24,7 +24,7 @@ export function GrowthPanel() {
           />
         </div>
 
-        <p className="muted">XP：{user.xp}/100</p>
+        <p className="muted">积分：{user.xp}/100</p>
       </div>
 
       <div className="panel-card panel-amber">

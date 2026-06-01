@@ -9,7 +9,7 @@ const ratingCopy: Record<
   { label: string; comment: string }
 > = {
   great: {
-    label: "很好，加 XP",
+    label: "很好，加积分",
     comment: "今天读得认真，书写也有进步。",
   },
   ok: {
@@ -40,8 +40,8 @@ export function ParentPage() {
   const completedTasks = tasks.filter((task) => task.status === "completed");
   const pendingReviewTasks = getPendingReviewTasks();
   const fragileItems = getFragileItems();
-  const baseXp = completedTasks.reduce((sum, task) => sum + task.baseXp, 0);
-  const bonusXp = reviews.reduce((sum, review) => sum + review.bonusXp, 0);
+  const basePoints = completedTasks.reduce((sum, task) => sum + task.baseXp, 0);
+  const bonusPoints = reviews.reduce((sum, review) => sum + review.bonusXp, 0);
 
   function handleReview(taskId: string, rating: ParentReviewRating) {
     reviewTask(taskId, rating, ratingCopy[rating].comment);
@@ -53,7 +53,7 @@ export function ParentPage() {
         <p className="eyebrow">家长模式</p>
         <h1 className="title">看见孩子今天新认识了哪些字</h1>
         <p className="subtitle">
-          孩子提交后已获得基础 XP。这里的评价用于鼓励、追加 XP 和安排复习，
+          孩子提交后已获得基础积分。这里的评价用于鼓励、追加积分和安排复习，
           不会撤销孩子已经完成的打卡。
         </p>
       </section>
@@ -67,10 +67,10 @@ export function ParentPage() {
           <p className="muted">当前等级 Lv.{user.level}</p>
         </div>
         <div className="metric-card metric-amber">
-          <p className="card-label">今日 XP</p>
-          <p className="card-value value-amber">+{baseXp + bonusXp}</p>
+          <p className="card-label">今日积分</p>
+          <p className="card-value value-amber">+{basePoints + bonusPoints}</p>
           <p className="muted">
-            基础 +{baseXp}，好评追加 +{bonusXp}
+            基础 +{basePoints}，好评追加 +{bonusPoints}
           </p>
         </div>
         <div className="metric-card metric-green">
@@ -85,7 +85,7 @@ export function ParentPage() {
           <div>
             <h2 className="section-title">待评价打卡</h2>
             <p className="section-desc">
-              好评会追加 XP；再练一次只进入复习计划，不扣 XP。
+              好评会追加积分；再练一次只进入复习计划，不扣积分。
             </p>
           </div>
         </div>
@@ -114,7 +114,7 @@ export function ParentPage() {
                           `${submission?.readingMinutes ?? 5} 分钟认读确认`}
                       </p>
                     </div>
-                    <div className="xp-badge">可追加 +{task.bonusXp}</div>
+                    <div className="xp-badge">可追加 +{task.bonusXp} 积分</div>
                   </div>
 
                   <div className="submission-actions">
@@ -171,7 +171,7 @@ export function ParentPage() {
                     <span>{task?.title}</span>
                     <strong>
                       {ratingCopy[review.rating].label}
-                      {review.bonusXp ? ` +${review.bonusXp}XP` : ""}
+                      {review.bonusXp ? ` +${review.bonusXp}积分` : ""}
                     </strong>
                   </li>
                 );
